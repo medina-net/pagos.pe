@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagos Digitales - MEDINA-NET</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:22px;
+    overflow-x:hidden;
+    background:
+        radial-gradient(circle at top left, rgba(0,212,255,0.42), transparent 32%),
+        radial-gradient(circle at top right, rgba(255,193,7,0.35), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(124,58,237,0.36), transparent 35%),
+        linear-gradient(135deg,#020617,#0f172a,#1e3a8a,#0ea5e9);
+}
+
+/* Decoración de fondo */
+body::before{
+    content:"";
+    position:fixed;
+    width:520px;
+    height:520px;
+    top:-230px;
+    right:-170px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.10);
+    z-index:0;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:360px;
+    height:360px;
+    bottom:-160px;
+    left:-130px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    z-index:0;
+}
+
+/* Contenedor principal */
+.container{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:660px;
+    padding:38px 30px;
+    text-align:center;
+    border-radius:36px;
+    background:linear-gradient(180deg,#ffffff,#f1f8ff);
+    box-shadow:0 34px 90px rgba(0,0,0,0.45);
+    border:1px solid rgba(255,255,255,0.9);
+    animation:entrada 0.85s ease;
+}
+
+/* Encabezado */
+.logo{
+    width:105px;
+    height:105px;
+    margin:0 auto 16px;
+    border-radius:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:48px;
+    background:linear-gradient(135deg,#facc15,#0ea5e9,#1e3a8a);
+    box-shadow:0 18px 40px rgba(14,165,233,0.48);
+}
+
+.empresa{
+    margin:0;
+    color:#1e40af;
+    font-size:15px;
+    font-weight:900;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+}
+
+h1{
+    margin-top:8px;
+    color:#10213f;
+    font-size:34px;
+    font-weight:900;
+    line-height:1.15;
+}
+
+.subtitulo{
+    margin-top:10px;
+    color:#52616b;
+    font-size:15px;
+    line-height:1.55;
+}
+
+/* Etiquetas */
+.badges{
+    margin-top:18px;
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:10px 16px;
+    border-radius:40px;
+    color:#1e40af;
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    font-size:13.5px;
+    font-weight:900;
+}
+
+.soporte{
+    margin:18px auto 0;
+    padding:12px 20px;
+    width:fit-content;
+    border-radius:40px;
+    color:white;
+    font-size:15px;
+    font-weight:900;
+    background:linear-gradient(135deg,#f59e0b,#ef4444,#dc2626);
+    box-shadow:0 12px 28px rgba(239,68,68,0.42);
+    animation:brillo 2.3s infinite;
+}
+
+/* Botón términos */
+.terminos-btn{
+    margin-top:15px;
+    padding:14px 24px;
+    border:none;
+    border-radius:42px;
+    color:white;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    background:linear-gradient(135deg,#1e40af,#0ea5e9);
+    box-shadow:0 12px 28px rgba(14,165,233,0.38);
+    transition:0.3s ease;
+}
+
+.terminos-btn:hover{
+    transform:translateY(-4px) scale(1.03);
+    box-shadow:0 16px 36px rgba(14,165,233,0.55);
+}
+
+.indicacion{
+    margin-top:28px;
+    color:#334155;
+    font-size:16px;
+    font-weight:900;
+}
+
+/* Métodos de pago */
+.metodos{
+    margin-top:22px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.metodo{
+    position:relative;
+    overflow:hidden;
+    min-height:150px;
+    padding:24px 14px;
+    border-radius:26px;
+    color:white;
+    text-decoration:none;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 16px 32px rgba(0,0,0,0.25);
+    transition:0.35s ease;
+}
+
+.metodo::before{
+    content:"";
+    position:absolute;
+    top:-50%;
+    left:-75%;
+    width:60%;
+    height:200%;
+    background:rgba(255,255,255,0.28);
+    transform:rotate(25deg);
+    transition:0.55s;
+}
+
+.metodo:hover::before{
+    left:125%;
+}
+
+.metodo:hover{
+    transform:translateY(-8px) scale(1.03);
+}
+
+.yape{
+    background:linear-gradient(135deg,#4c1d95,#7b2cbf,#c77dff);
+}
+
+.agora{
+    background:linear-gradient(135deg,#00a884,#00cec9,#0ea5e9);
+}
+
+.peypal{
+    background:linear-gradient(135deg,#003087,#0070ba,#00a8e8);
+}
+
+.binance{
+    background:linear-gradient(135deg,#f0b90b,#f8d33a,#ffd60a);
+    color:#111827;
+}
+
+.binance h2,
+.binance p{
+    color:#111827;
+}
+
+.icono{
+    font-size:36px;
+    margin-bottom:8px;
+}
+
+.metodo h2{
+    font-size:28px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.metodo p{
+    margin-top:9px;
+    font-size:14px;
+    line-height:1.45;
+    opacity:0.96;
+}
+
+/* Información */
+.info-box{
+    margin-top:26px;
+    padding:18px;
+    border-radius:24px;
+    background:linear-gradient(180deg,#ffffff,#eaf6ff);
+    border:1px solid #bde0ff;
+    color:#334155;
+    font-size:14px;
+    line-height:1.55;
+}
+
+/* Guía de pago y ciclo de facturación */
+.facturacion-box{
+    margin-top:26px;
+    padding:24px 18px;
+    border-radius:30px;
+    background:linear-gradient(180deg,#ffffff,#eaf6ff);
+    border:1px solid #bde0ff;
+    box-shadow:inset 0 0 22px rgba(14,165,233,0.10);
+    text-align:center;
+}
+
+.facturacion-icono{
+    width:64px;
+    height:64px;
+    margin:0 auto 12px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:28px;
+    background:linear-gradient(135deg,#f59e0b,#0ea5e9,#1e40af);
+    box-shadow:0 12px 26px rgba(14,165,233,0.35);
+}
+
+.facturacion-box h3{
+    margin:0;
+    color:#10213f;
+    font-size:23px;
+    font-weight:900;
+}
+
+.guia-intro{
+    margin:10px 0 16px;
+    color:#52616b;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.guia-lista{
+    display:grid;
+    gap:10px;
+    margin-top:14px;
+}
+
+.guia-item{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:12px 14px;
+    border-radius:18px;
+    background:#ffffff;
+    border:1px solid #dbeafe;
+    color:#334155;
+    font-size:13.5px;
+    line-height:1.5;
+    text-align:left;
+    box-shadow:0 8px 18px rgba(0,0,0,0.06);
+}
+
+.guia-item i{
+    color:#0ea5e9;
+    font-size:17px;
+    margin-top:2px;
+}
+
+.guia-item.corte{
+    background:#fff1f2;
+    border:1px solid #fecdd3;
+}
+
+.guia-item.corte i{
+    color:#dc2626;
+}
+
+.facturacion-box h4{
+    margin:22px 0 12px;
+    color:#10213f;
+    font-size:18px;
+    font-weight:900;
+}
+
+.calendario-pagos{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:7px;
+    padding:14px;
+    border-radius:22px;
+    background:white;
+    border:1px solid #dbeafe;
+    box-shadow:0 14px 30px rgba(0,0,0,0.12);
+}
+
+.dia-nombre{
+    padding:8px 4px;
+    border-radius:12px;
+    background:#1e40af;
+    color:white;
+    font-size:12px;
+    font-weight:900;
+}
+
+.dia{
+    min-height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:13px;
+    background:#f8fafc;
+    color:#334155;
+    font-size:13px;
+    font-weight:800;
+    border:1px solid #e2e8f0;
+}
+
+.dia.pago{
+    color:white;
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+    border:none;
+    box-shadow:0 8px 16px rgba(34,197,94,0.32);
+}
+
+.dia.corte-dia{
+    color:white;
+    background:linear-gradient(135deg,#dc2626,#ef4444);
+    border:none;
+    box-shadow:0 8px 16px rgba(239,68,68,0.32);
+}
+
+.dia.vacio{
+    background:transparent;
+    border:none;
+    box-shadow:none;
+}
+
+.facturacion-info{
+    margin-top:14px;
+    padding:12px 14px;
+    border-radius:18px;
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    color:#1e40af;
+    font-size:13.5px;
+    font-weight:800;
+    line-height:1.5;
+}
+
+/* Footer */
+.footer{
+    margin-top:24px;
+    padding-top:16px;
+    border-top:1px solid #dbeafe;
+    color:#64748b;
+    font-size:14px;
+}
+
+.footer strong{
+    color:#10213f;
+}
+
+/* Botones flotantes */
+.flotante{
+    position:fixed;
+    right:22px;
+    z-index:50;
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    text-decoration:none;
+    font-size:28px;
+    transition:0.3s ease;
+    animation:flotar 2.4s infinite;
+}
+
+.whatsapp-flotante{
+    bottom:95px;
+    background:linear-gradient(135deg,#25D366,#128C7E);
+    box-shadow:0 12px 30px rgba(37,211,102,0.52);
+}
+
+.web-flotante{
+    bottom:22px;
+    background:linear-gradient(135deg,#f59e0b,#0ea5e9,#1e40af);
+    box-shadow:0 12px 30px rgba(14,165,233,0.52);
+}
+
+.flotante:hover{
+    transform:scale(1.12);
+}
+
+.flotante span{
+    position:absolute;
+    right:72px;
+    background:#10213f;
+    color:white;
+    padding:9px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:900;
+    white-space:nowrap;
+    opacity:0;
+    pointer-events:none;
+    transition:0.3s ease;
+}
+
+.flotante:hover span{
+    opacity:1;
+}
+
+/* Modal términos */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.74);
+    justify-content:center;
+    align-items:center;
+    padding:18px;
+    z-index:80;
+}
+
+.modal-content{
+    width:100%;
+    max-width:590px;
+    max-height:86vh;
+    overflow:hidden;
+    padding:24px;
+    border-radius:28px;
+    text-align:center;
+    background:linear-gradient(180deg,#ffffff,#f1f8ff);
+    box-shadow:0 25px 75px rgba(0,0,0,0.48);
+    animation:entradaModal 0.35s ease;
+}
+
+.modal-content h2{
+    color:#10213f;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.texto-terminos{
+    height:330px;
+    overflow-y:auto;
+    margin:15px 0;
+    padding:18px;
+    border-radius:20px;
+    text-align:left;
+    color:#334155;
+    background:white;
+    border:1px solid #cfe2ff;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.texto-terminos h3{
+    color:#1e40af;
+}
+
+.cerrar-btn{
+    width:100%;
+    padding:14px 18px;
+    border:none;
+    border-radius:36px;
+    color:white;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    background:linear-gradient(135deg,#ff7a00,#ff2f6d);
+    box-shadow:0 12px 25px rgba(249,115,22,0.35);
+    transition:0.3s ease;
+}
+
+.cerrar-btn:hover{
+    transform:scale(1.03);
+}
+
+/* Animaciones */
+@keyframes entrada{
+    from{
+        opacity:0;
+        transform:translateY(35px) scale(0.96);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+@keyframes entradaModal{
+    from{
+        opacity:0;
+        transform:scale(0.92);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@keyframes brillo{
+    0%{
+        transform:scale(1);
+        box-shadow:0 12px 28px rgba(239,68,68,0.42);
+    }
+    50%{
+        transform:scale(1.04);
+        box-shadow:0 16px 36px rgba(239,68,68,0.65);
+    }
+    100%{
+        transform:scale(1);
+        box-shadow:0 12px 28px rgba(239,68,68,0.42);
+    }
+}
+
+@keyframes flotar{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-6px);}
+    100%{transform:translateY(0);}
+}
+
+/* Responsive */
+@media(max-width:768px){
+    body{
+        align-items:flex-start;
+        padding:24px 16px;
+    }
+
+    .container{
+        max-width:560px;
+        padding:34px 24px;
+    }
+}
+
+@media(max-width:520px){
+    body{
+        align-items:flex-start;
+        padding:18px 12px;
+    }
+
+    body::before{
+        width:300px;
+        height:300px;
+        top:-130px;
+        right:-120px;
+    }
+
+    body::after{
+        width:250px;
+        height:250px;
+        bottom:-110px;
+        left:-100px;
+    }
+
+    .container{
+        padding:28px 18px;
+        border-radius:28px;
+    }
+
+    .logo{
+        width:82px;
+        height:82px;
+        font-size:38px;
+        border-radius:24px;
+    }
+
+    h1{
+        font-size:27px;
+    }
+
+    .subtitulo{
+        font-size:14px;
+    }
+
+    .badges{
+        gap:8px;
+    }
+
+    .badge{
+        font-size:12.5px;
+        padding:9px 13px;
+    }
+
+    .soporte{
+        font-size:14px;
+        padding:10px 15px;
+    }
+
+    .terminos-btn{
+        width:100%;
+        padding:13px 16px;
+        font-size:14px;
+    }
+
+    .metodos{
+        grid-template-columns:1fr;
+        gap:14px;
+    }
+
+    .metodo{
+        min-height:128px;
+        padding:20px 12px;
+        border-radius:24px;
+    }
+
+    .icono{
+        font-size:31px;
+    }
+
+    .metodo h2{
+        font-size:26px;
+    }
+
+    .metodo p{
+        font-size:14px;
+    }
+
+    .info-box,
+    .facturacion-box{
+        font-size:13.5px;
+        padding:16px 14px;
+    }
+
+    .facturacion-box h3{
+        font-size:21px;
+    }
+
+    .guia-item{
+        font-size:13px;
+    }
+
+    .calendario-pagos{
+        gap:5px;
+        padding:10px;
+    }
+
+    .dia-nombre{
+        font-size:10.5px;
+        padding:7px 2px;
+    }
+
+    .dia{
+        min-height:34px;
+        font-size:12px;
+        border-radius:10px;
+    }
+
+    .facturacion-info{
+        font-size:12.5px;
+    }
+
+    .footer{
+        font-size:13.5px;
+    }
+
+    .flotante{
+        width:56px;
+        height:56px;
+        right:16px;
+        font-size:25px;
+    }
+
+    .whatsapp-flotante{
+        bottom:84px;
+    }
+
+    .web-flotante{
+        bottom:16px;
+    }
+
+    .flotante span{
+        display:none;
+    }
+
+    .modal-content{
+        padding:18px;
+        border-radius:24px;
+    }
+
+    .texto-terminos{
+        height:300px;
+        font-size:12.5px;
+        padding:14px;
+    }
+}
+
+@media(max-width:360px){
+    .container{
+        padding:24px 14px;
+    }
+
+    h1{
+        font-size:24px;
+    }
+
+    .metodo h2{
+        font-size:24px;
+    }
+
+    .soporte{
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <i class="fa-solid fa-wifi"></i>
+    </div>
+
+    <p class="empresa">MEDINA-NET</p>
+
+    <h1>Pagos Digitales</h1>
+
+    <div class="subtitulo">
+        Plataforma de pagos moderna, rápida y segura para clientes de MEDINA-NET.
+    </div>
+
+    <div class="badges">
+        <div class="badge">
+            <i class="fa-solid fa-shield-halved"></i> Pago seguro
+        </div>
+
+        <div class="badge">
+            <i class="fa-solid fa-clock"></i> Atención rápida
+        </div>
+    </div>
+
+    <div class="soporte">
+        🛠️ Soporte Técnico 24/7
+    </div>
+
+    <button class="terminos-btn" onclick="abrirTerminos()">
+        <i class="fa-solid fa-file-contract"></i> Ver Términos y Condiciones
+    </button>
+
+    <div class="indicacion">
+        Selecciona tu método de pago
+    </div>
+
+    <div class="metodos">
+
+        <a class="metodo yape" href="yape/index.html">
+            <div class="icono">💜</div>
+            <h2>YAPE</h2>
+            <p>Pago rápido desde tu celular</p>
+        </a>
+
+        <a class="metodo agora" href="agora/index.html">
+            <div class="icono">💙</div>
+            <h2>AGORA</h2>
+            <p>Ver QR y datos de pago</p>
+        </a>
+
+        <a class="metodo peypal" href="peypal/index.html">
+            <div class="icono">💙</div>
+            <h2>PEYPAL</h2>
+            <p>Pago internacional seguro</p>
+        </a>
+
+        <a class="metodo binance" href="binance/index.html">
+            <div class="icono">💛</div>
+            <h2>BINANCE</h2>
+            <p>Pago digital con Binance</p>
+        </a>
+
+    </div>
+
+    <div class="info-box">
+        Luego de realizar tu pago, envía tu comprobante por WhatsApp para validar la operación. Nuestro equipo confirmará tu pago a la brevedad.
+    </div>
+
+    <!-- GUÍA DE PAGO Y CICLO DE FACTURACIÓN -->
+    <div class="facturacion-box">
+        <div class="facturacion-icono">
+            <i class="fa-solid fa-calendar-days"></i>
+        </div>
+
+        <h3>💳 Guía de Pago</h3>
+
+        <p class="guia-intro">
+            Estimado cliente, recuerde las siguientes consideraciones acerca de nuestro servicio de Internet:
+        </p>
+
+        <div class="guia-lista">
+            <div class="guia-item">
+                <i class="fa-solid fa-wifi"></i>
+                <span>El servicio se brinda bajo modalidad de <strong>suscripción mensual</strong> con pagos por adelantado.</span>
+            </div>
+
+            <div class="guia-item">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Puede realizar sus pagos mensuales desde el día <strong>15 hasta el día 17</strong> de cada mes.</span>
+            </div>
+
+            <div class="guia-item corte">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>El día <strong>18</strong> se realiza el corte del servicio a los usuarios que no estén al día.</span>
+            </div>
+
+            <div class="guia-item">
+                <i class="fa-solid fa-wallet"></i>
+                <span>También puede pagar por adelantado varios meses, según su conveniencia.</span>
+            </div>
+        </div>
+
+        <h4>Calendario de Pagos</h4>
+
+        <div class="calendario-pagos">
+            <div class="dia-nombre">Dom</div>
+            <div class="dia-nombre">Lun</div>
+            <div class="dia-nombre">Mar</div>
+            <div class="dia-nombre">Mié</div>
+            <div class="dia-nombre">Jue</div>
+            <div class="dia-nombre">Vie</div>
+            <div class="dia-nombre">Sáb</div>
+
+            <div class="dia">1</div>
+            <div class="dia">2</div>
+            <div class="dia">3</div>
+            <div class="dia">4</div>
+            <div class="dia">5</div>
+            <div class="dia">6</div>
+            <div class="dia">7</div>
+
+            <div class="dia">8</div>
+            <div class="dia">9</div>
+            <div class="dia">10</div>
+            <div class="dia">11</div>
+            <div class="dia">12</div>
+            <div class="dia">13</div>
+            <div class="dia">14</div>
+
+            <div class="dia pago">15</div>
+            <div class="dia pago">16</div>
+            <div class="dia pago">17</div>
+            <div class="dia corte-dia">18</div>
+            <div class="dia">19</div>
+            <div class="dia">20</div>
+            <div class="dia">21</div>
+
+            <div class="dia">22</div>
+            <div class="dia">23</div>
+            <div class="dia">24</div>
+            <div class="dia">25</div>
+            <div class="dia">26</div>
+            <div class="dia">27</div>
+            <div class="dia">28</div>
+
+            <div class="dia">29</div>
+            <div class="dia">30</div>
+            <div class="dia vacio"></div>
+            <div class="dia vacio"></div>
+            <div class="dia vacio"></div>
+            <div class="dia vacio"></div>
+            <div class="dia vacio"></div>
+        </div>
+
+        <div class="facturacion-info">
+            🟢 Días de pago: <strong>15, 16 y 17</strong> &nbsp; | &nbsp; 🔴 Corte: <strong>18</strong>
+        </div>
+    </div>
+
+    <div class="footer">
+        Gracias por tu preferencia 🙌<br>
+        <strong>MEDINA-NET</strong>
+    </div>
+
+</div>
+
+<!-- BOTÓN FLOTANTE WHATSAPP -->
+<a class="flotante whatsapp-flotante" href="https://wa.me/51935128270?text=Hola,%20quiero%20hacer%20una%20consulta%20sobre%20mi%20pago." target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span>Escríbenos por WhatsApp</span>
+</a>
+
+<!-- BOTÓN FLOTANTE PÁGINA WEB -->
+<a class="flotante web-flotante" href="https://medina-net.github.io/wireles/" target="_blank">
+    <i class="fa-solid fa-globe"></i>
+    <span>Visitar Página Web</span>
+</a>
+<!-- MODAL TÉRMINOS Y CONDICIONES -->
+<div id="modalTerminos" class="modal">
+    <div class="modal-content">
+        <h2>📄 Términos y Condiciones</h2>
+
+        <div class="texto-terminos">
+            <h3 style="text-align:center;">TÉRMINOS Y CONDICIONES DEL SERVICIO</h3>
+
+            <br>
+
+            <b>1. IDENTIFICACIÓN DEL SERVICIO</b><br>
+            MEDINA-NET brinda servicios digitales y de internet dentro de su zona de cobertura.
+
+            <br><br>
+
+            <b>2. NATURALEZA DEL SERVICIO</b><br>
+• Servicio tipo “mejor esfuerzo” (Best Effort).<br>
+• No es dedicado ni garantizado al 100%.<br>
+• La velocidad es referencial.
+
+<br><br>
+
+<b>3. EQUIPOS EN COMODATO</b><br>
+Equipos entregados:<br>
+• Antena / CPE<br>
+• Router<br>
+• Fuente de poder<br>
+• Cableado<br>
+• Se entregan en calidad de préstamo (comodato) mientras el servicio esté activo<br>
+
+<br>
+
+<b>Compromisos del cliente:</b><br>
+• No manipular equipos<br>
+• No cambiar ubicación<br>
+• No permitir acceso a terceros no autorizados<br>
+
+<br>
+
+<b>El proveedor podrá retirar equipos si:</b><br>
+• Cancelación<br>
+• Falta de pago<br>
+• Uso indebido<br>
+
+<br><br>
+
+<b>4. RESPONSABILIDAD</b><br>
+
+<b>✔ El proveedor se responsabiliza por:</b><br>
+• Fallas técnicas<br>
+• Defectos de fábrica no mayor ha 2meses de haber hecho la instalacion<br>
+
+<br>
+
+<b>❌ Cliente: asume responsabilidad por daños causados</b><br>
+• Golpes o caídas<br>
+• Humedad<br>
+• Problemas eléctricos<br>
+• Rayos<br>
+• Robo o pérdida<br>
+
+<br>
+
+💰 Deberá pagar reparación o reposición.
+
+<br><br>
+
+<b>5. INSTALACIÓN</b><br>
+Se realiza previa evaluación técnica.<br>
+
+Incluye:<br>
+• Perforaciones<br>
+• Instalación en techo o pared<br>
+
+<br><br>
+
+<b>6. VELOCIDAD Y DISPONIBILIDAD</b><br>
+• 50% garantizado en horas punta<br>
+• Hasta 100% fuera de horas punta<br>
+
+<br>
+
+<b>Factores que afectan:</b><br>
+• Congestión<br>
+• Interferencia<br>
+• Clima<br>
+• Obstáculos<br>
+
+<br>
+
+No garantizado para:<br>
+• Streaming<br>
+• Juegos<br>
+• Servidores<br>
+
+<br><br>
+
+<b>7. USO JUSTO</b><br>
+Se restringirá si hay:<br>
+• Consumo excesivo<br>
+• Reventa<br>
+• Uso como servidor<br>
+
+<br><br>
+
+<b>8. USO PROHIBIDO</b><br>
+❌ Actividades ilegales<br>
+❌ Hacking o ataques<br>
+❌ Contenido ilícito<br>
+❌ Reventa sin permiso<br>
+
+<br>
+
+📌 Puede causar suspensión inmediata.
+
+<br><br>
+
+<b>9. RESPONSABILIDAD EN INTERNET</b><br>
+El proveedor NO responde por:<br>
+• Virus<br>
+• Fraudes<br>
+• Páginas maliciosas<br>
+
+<br>
+
+El cliente debe proteger sus dispositivos.
+
+<br><br>
+
+<b>10. SOPORTE TÉCNICO</b><br>
+• Dentro de horario laboral<br>
+
+Visitas:<br>
+• Gratis si es falla del proveedor<br>
+• Con costo si es del cliente<br>
+
+<br><br>
+
+<b>11. INTERRUPCIONES</b><br>
+Pueden ocurrir por:<br>
+• Mantenimiento<br>
+• Fallas eléctricas<br>
+• Problemas externos<br>
+
+<br>
+
+No generan indemnización.
+
+<br><br>
+
+<b>12. PAGOS</b><br>
+• Mensual adelantado<br>
+
+Incumplimiento:<br>
+• Corte automático<br>
+• Posible recargo<br>
+
+<br><br>
+
+<b>13. RECONEXIÓN</b><br>
+Puede tener costo adicional.
+
+<br><br>
+
+<b>14. CANCELACIÓN</b><br>
+Requiere:<br>
+• Solicitud previa<br>
+• Devolución del equipos<br>
+
+<br>
+
+❌ Si no devuelve → se cobra del equipo.
+
+<br><br>
+
+<b>15. ACCESO TÉCNICO</b><br>
+Debe permitir ingreso para:<br>
+• Instalación<br>
+• Mantenimiento<br>
+• Retiro<br>
+
+<br><br>
+
+<b>16. LIMITACIÓN</b><br>
+No se responde por:<br>
+• Pérdidas económicas<br>
+• Fallas externas<br>
+
+<br><br>
+
+<b>17. MODIFICACIONES</b><br>
+Se pueden actualizar los términos en cualquier momento.
+
+<br><br>
+
+<b>18. ACEPTACIÓN</b><br>
+El uso del servicio implica aceptación total de estos términos.
+        </div>
+
+        <button class="cerrar-btn" onclick="cerrarTerminos()">❌ Cerrar</button>
+    </div>
+</div>
+
+<script>
+function abrirTerminos(){
+    document.getElementById("modalTerminos").style.display = "flex";
+}
+
+function cerrarTerminos(){
+    document.getElementById("modalTerminos").style.display = "none";
+}
+</script>
+
+</body>
+</html>
+

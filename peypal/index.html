@@ -11,6 +11,8 @@ html{
 }
 
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
 }
 
@@ -54,12 +56,12 @@ body::after{
     z-index:0;
 }
 
-/* Tarjeta */
+/* Tarjeta principal */
 .container{
     position:relative;
     z-index:1;
     width:100%;
-    max-width:490px;
+    max-width:500px;
     padding:36px 26px;
     text-align:center;
     border-radius:34px;
@@ -71,14 +73,14 @@ body::after{
 
 /* Logo */
 .logo{
-    width:98px;
-    height:98px;
+    width:100px;
+    height:100px;
     margin:0 auto 16px;
-    border-radius:28px;
+    border-radius:30px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:45px;
+    font-size:46px;
     color:white;
     background:linear-gradient(135deg,#003087,#0070ba,#009cde);
     box-shadow:0 16px 35px rgba(0,112,186,0.48);
@@ -107,18 +109,21 @@ h1{
     line-height:1.5;
 }
 
-/* Número o dato */
-.numero{
-    margin:22px auto 14px;
-    padding:15px 22px;
-    width:fit-content;
-    border-radius:45px;
-    font-size:24px;
-    font-weight:900;
-    color:#003087;
+/* Datos de pago */
+.dato-pago{
+    margin:22px auto 16px;
+    padding:15px 18px;
+    border-radius:24px;
     background:#eaf6ff;
     border:2px dashed #009cde;
-    letter-spacing:0.5px;
+    color:#003087;
+    text-align:left;
+    font-size:15px;
+    line-height:1.7;
+}
+
+.dato-pago strong{
+    color:#0070ba;
 }
 
 /* Soporte */
@@ -135,7 +140,7 @@ h1{
     animation:brillo 2.2s infinite;
 }
 
-/* QR */
+/* Caja QR */
 .qr-box{
     margin-top:20px;
     padding:22px 18px;
@@ -162,7 +167,44 @@ h1{
     animation:pulso 2.6s infinite;
 }
 
-/* Aviso */
+/* Botones */
+.botones{
+    margin-top:20px;
+    display:grid;
+    gap:12px;
+}
+
+.btn{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    width:100%;
+    padding:16px 20px;
+    border-radius:40px;
+    color:white;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:900;
+    border:none;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+.btn-paypal{
+    background:linear-gradient(135deg,#003087,#0070ba,#009cde);
+    box-shadow:0 12px 25px rgba(0,112,186,0.38);
+}
+
+.btn-whatsapp{
+    background:linear-gradient(135deg,#25d366,#128c7e);
+    box-shadow:0 12px 25px rgba(37,211,102,0.35);
+}
+
+.btn:hover{
+    transform:translateY(-4px) scale(1.02);
+}
+
 .aviso{
     margin-top:18px;
     padding:15px 16px;
@@ -172,27 +214,6 @@ h1{
     border:1px solid #bae6fd;
     font-size:14px;
     line-height:1.5;
-}
-
-/* Botón WhatsApp */
-.btn{
-    display:block;
-    width:100%;
-    margin-top:20px;
-    padding:16px 20px;
-    border-radius:40px;
-    color:white;
-    text-decoration:none;
-    font-size:15px;
-    font-weight:900;
-    background:linear-gradient(135deg,#25d366,#128c7e);
-    box-shadow:0 12px 25px rgba(37,211,102,0.35);
-    transition:0.3s ease;
-}
-
-.btn:hover{
-    transform:translateY(-4px) scale(1.02);
-    box-shadow:0 16px 34px rgba(37,211,102,0.50);
 }
 
 /* Botón volver */
@@ -268,7 +289,7 @@ h1{
     }
 
     .container{
-        max-width:470px;
+        max-width:480px;
         padding:32px 24px;
     }
 }
@@ -300,9 +321,9 @@ h1{
     }
 
     .logo{
-        width:80px;
-        height:80px;
-        font-size:36px;
+        width:82px;
+        height:82px;
+        font-size:37px;
         border-radius:24px;
     }
 
@@ -314,9 +335,9 @@ h1{
         font-size:14px;
     }
 
-    .numero{
-        font-size:20px;
-        padding:13px 18px;
+    .dato-pago{
+        font-size:14px;
+        padding:14px 16px;
     }
 
     .soporte{
@@ -348,10 +369,6 @@ h1{
         font-size:24px;
     }
 
-    .numero{
-        font-size:18px;
-    }
-
     .btn{
         font-size:13.5px;
     }
@@ -373,27 +390,30 @@ h1{
         Realiza tu pago de forma rápida, moderna y segura.
     </div>
 
-    
-       <div class="aviso">
-        <br>
-	<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=medinapaul91%40gmail%2ecom&item_name=Donacion%20Misoft&no_shipping=0&no_note=1&tax=0&currency_code=USD&bn=PP%2dDonationsBF&charset=UTF%2d8" />
-<br> 
-    <div class="qr-box">  
-        <img src="qr.png" alt="Código QR Peypal">
-    </div>
-        <br />
-	<li>PAGAR AHORA </li> 
-<br>
-    </a>
-    </div>
-	
-	    <div class="aviso">
-        Luego de realizar tu pago por <strong>Peypal</strong>, envía tu comprobante por WhatsApp para validar tu operación.
+    <div class="soporte">
+        🛠️ Soporte Técnico 24/7
     </div>
 
-    <a class="btn" href="https://wa.me/51935128270?text=Hola,%20ya%20realicé%20mi%20pago%20por%20Peypal.%20Adjunto%20mi%20comprobante." target="_blank">
-        📲 Enviar comprobante por WhatsApp
-    </a>
+    <div class="qr-box">
+        <h3>Escanea el código QR</h3>
+        <img src="qr.png" alt="Código QR Peypal">
+    </div>
+
+    <div class="botones">
+
+        <a class="btn btn-paypal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=medinapaul91%40gmail%2ecom&item_name=Pago%20MEDINA-NET&no_shipping=0&no_note=1&tax=0&currency_code=USD&bn=PP%2dDonationsBF&charset=UTF%2d8" target="_blank">
+            💳 Pagar ahora con Peypal
+        </a>
+
+        <a class="btn btn-whatsapp" href="https://wa.me/51935128270?text=Hola,%20ya%20realicé%20mi%20pago%20por%20Peypal.%20Adjunto%20mi%20comprobante." target="_blank">
+            📲 Enviar comprobante por WhatsApp
+        </a>
+
+    </div>
+
+    <div class="aviso">
+        Luego de realizar tu pago por <strong>Peypal</strong>, envía tu comprobante por WhatsApp para validar tu operación.
+    </div>
 
     <a class="volver" href="../index.html">⬅ Volver al inicio</a>
 

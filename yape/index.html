@@ -1,0 +1,198 @@
+<!-- ARCHIVO: yape/index.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pago con Yape - MEDINA-NET</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+        radial-gradient(circle at top left, #c77dff, transparent 35%),
+        linear-gradient(135deg,#4b0082,#8e44ad);
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:460px;
+    background:white;
+    padding:32px 25px;
+    border-radius:28px;
+    text-align:center;
+    box-shadow:0 25px 55px rgba(0,0,0,0.35);
+    animation:entrada 0.8s ease;
+}
+
+.logo{
+    width:90px;
+    height:90px;
+    margin:0 auto 15px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#6f2dbd,#b517ff);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:42px;
+    box-shadow:0 12px 25px rgba(111,45,189,0.45);
+}
+
+h1{
+    margin:0;
+    color:#6f2dbd;
+    font-size:32px;
+    font-weight:900;
+}
+
+.subtitulo{
+    margin-top:8px;
+    color:#555;
+    font-size:15px;
+}
+
+.numero{
+    margin:22px auto;
+    padding:14px 20px;
+    width:fit-content;
+    border-radius:35px;
+    background:#f4eaff;
+    border:2px dashed #6f2dbd;
+    color:#6f2dbd;
+    font-size:27px;
+    font-weight:900;
+}
+
+.qr-box{
+    margin-top:20px;
+    padding:20px;
+    border-radius:24px;
+    background:#faf5ff;
+    border:1px solid #ead7ff;
+}
+
+.qr-box h3{
+    margin:0 0 15px;
+    color:#333;
+}
+
+.qr-box img{
+    width:230px;
+    max-width:100%;
+    padding:10px;
+    background:white;
+    border-radius:22px;
+    box-shadow:0 12px 25px rgba(0,0,0,0.25);
+    animation:pulso 2.5s infinite;
+}
+
+.info{
+    margin-top:18px;
+    color:#444;
+    font-size:15px;
+    line-height:1.5;
+}
+
+.btn{
+    display:block;
+    width:100%;
+    margin-top:20px;
+    padding:15px 20px;
+    border-radius:35px;
+    background:linear-gradient(135deg,#6f2dbd,#b517ff);
+    color:white;
+    text-decoration:none;
+    font-weight:900;
+    box-shadow:0 10px 22px rgba(111,45,189,0.35);
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.04);
+}
+
+.volver{
+    display:inline-block;
+    margin-top:22px;
+    color:#6f2dbd;
+    text-decoration:none;
+    font-weight:800;
+}
+
+.volver:hover{
+    text-decoration:underline;
+}
+
+.footer{
+    margin-top:20px;
+    padding-top:14px;
+    border-top:1px solid #eee;
+    color:#666;
+    font-size:14px;
+}
+
+@keyframes entrada{
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(0.96);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+@keyframes pulso{
+    0%{ transform:scale(1); }
+    50%{ transform:scale(1.04); }
+    100%{ transform:scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">💜</div>
+
+    <h1>Pago con Yape</h1>
+    <div class="subtitulo">MEDINA-NET | Pago rápido y seguro</div>
+
+    <div class="qr-box">
+        <h3>Escanea el QR para pagar</h3>
+        <img src="../qr.png" alt="Código QR Yape">
+    </div>
+
+    <div class="info">
+        Realiza tu pago mediante <strong>Yape</strong> y luego envía tu comprobante por WhatsApp.
+    </div>
+
+    <a class="btn" href="https://wa.me/51935128270?text=Hola,%20ya%20realicé%20mi%20pago%20por%20Yape.%20Adjunto%20mi%20comprobante." target="_blank">
+        Enviar comprobante por WhatsApp
+    </a>
+
+    <a class="metodo yape" href="index.html">⬅ Volver al inicio</a>
+
+    <div class="footer">
+        Gracias por tu preferencia 🙌<br>
+        <strong>MEDINA-NET</strong>
+    </div>
+
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pago con Agora - MEDINA-NET</title>
+
+<style>
+html{
+    scroll-behavior:smooth;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    overflow-x:hidden;
+    background:
+        radial-gradient(circle at top left, rgba(128,255,219,0.45), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(0,206,201,0.45), transparent 35%),
+        linear-gradient(135deg,#003b46,#007c89,#00a9b7,#00cec9);
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    width:480px;
+    height:480px;
+    border-radius:50%;
+    top:-210px;
+    right:-150px;
+    background:rgba(255,255,255,0.12);
+    z-index:0;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:340px;
+    height:340px;
+    border-radius:50%;
+    bottom:-150px;
+    left:-120px;
+    background:rgba(255,255,255,0.10);
+    z-index:0;
+}
+
+.container{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:500px;
+    padding:35px 26px;
+    text-align:center;
+    border-radius:34px;
+    background:linear-gradient(180deg,#ffffff,#ecfffb);
+    box-shadow:0 30px 75px rgba(0,0,0,0.42);
+    border:1px solid rgba(255,255,255,0.9);
+    animation:entrada 0.85s ease;
+}
+
+.logo{
+    width:98px;
+    height:98px;
+    margin:0 auto 16px;
+    border-radius:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:45px;
+    color:white;
+    background:linear-gradient(135deg,#00a884,#00cec9,#0ea5e9);
+    box-shadow:0 16px 35px rgba(0,206,201,0.48);
+}
+
+.empresa{
+    margin:0;
+    color:#008f7a;
+    font-size:14px;
+    letter-spacing:2px;
+    font-weight:900;
+    text-transform:uppercase;
+}
+
+h1{
+    margin:8px 0 0;
+    color:#073b4c;
+    font-size:32px;
+    font-weight:900;
+}
+
+.subtitulo{
+    margin-top:8px;
+    color:#35616a;
+    font-size:15px;
+    line-height:1.5;
+}
+
+.dato-pago{
+    margin:20px auto 14px;
+    padding:15px 20px;
+    border-radius:24px;
+    background:#e6fffb;
+    border:2px dashed #00a9b7;
+    color:#07575b;
+    text-align:left;
+    font-size:15px;
+    line-height:1.7;
+}
+
+.dato-pago strong{
+    color:#008f7a;
+}
+
+.soporte{
+    margin:0 auto 22px;
+    padding:11px 18px;
+    width:fit-content;
+    border-radius:40px;
+    color:white;
+    font-size:15px;
+    font-weight:900;
+    background:linear-gradient(135deg,#008f7a,#00cec9,#0ea5e9);
+    box-shadow:0 12px 25px rgba(0,206,201,0.40);
+    animation:brillo 2.2s infinite;
+}
+
+.qr-box{
+    margin-top:20px;
+    padding:22px 18px;
+    border-radius:28px;
+    background:linear-gradient(180deg,#ffffff,#dffdf8);
+    border:1px solid #9ff3e8;
+    box-shadow:inset 0 0 20px rgba(0,206,201,0.15);
+}
+
+.qr-box h3{
+    margin:0 0 15px;
+    color:#073b4c;
+    font-size:20px;
+    font-weight:900;
+}
+
+.qr-box img{
+    width:230px;
+    max-width:100%;
+    padding:11px;
+    background:white;
+    border-radius:24px;
+    box-shadow:0 14px 30px rgba(0,0,0,0.25);
+    animation:pulso 2.6s infinite;
+}
+
+.aviso{
+    margin-top:18px;
+    padding:15px 16px;
+    border-radius:22px;
+    color:#07575b;
+    background:#ecfffb;
+    border:1px solid #9ff3e8;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.botones{
+    margin-top:20px;
+    display:grid;
+    gap:12px;
+}
+
+.btn{
+    display:block;
+    width:100%;
+    padding:15px 20px;
+    border-radius:40px;
+    color:white;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:900;
+    border:none;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+.btn-whatsapp{
+    background:linear-gradient(135deg,#25d366,#128c7e);
+    box-shadow:0 12px 25px rgba(37,211,102,0.35);
+}
+
+.btn-terminos{
+    background:linear-gradient(135deg,#008f7a,#00cec9,#0ea5e9);
+    box-shadow:0 12px 25px rgba(0,206,201,0.38);
+}
+
+.btn:hover{
+    transform:translateY(-4px) scale(1.02);
+}
+
+.volver{
+    display:inline-block;
+    margin-top:22px;
+    color:#008f7a;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:900;
+}
+
+.volver:hover{
+    text-decoration:underline;
+}
+
+.footer{
+    margin-top:22px;
+    padding-top:15px;
+    border-top:1px solid #9ff3e8;
+    color:#64748b;
+    font-size:14px;
+}
+
+.footer strong{
+    color:#073b4c;
+}
+
+/* Modal */
+.modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.72);
+    justify-content:center;
+    align-items:center;
+    padding:18px;
+    z-index:20;
+}
+
+.modal-content{
+    width:100%;
+    max-width:560px;
+    max-height:86vh;
+    overflow:hidden;
+    text-align:center;
+    padding:24px;
+    border-radius:26px;
+    background:linear-gradient(180deg,#ffffff,#ecfffb);
+    box-shadow:0 25px 70px rgba(0,0,0,0.45);
+    animation:entradaModal 0.35s ease;
+}
+
+.modal-content h2{
+    color:#073b4c;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.texto-terminos{
+    height:320px;
+    overflow-y:auto;
+    text-align:left;
+    font-size:13px;
+    line-height:1.65;
+    margin:15px 0;
+    padding:18px;
+    border-radius:18px;
+    color:#07575b;
+    background:white;
+    border:1px solid #9ff3e8;
+}
+
+.cerrar-btn{
+    width:100%;
+    padding:14px 18px;
+    border:none;
+    border-radius:35px;
+    color:white;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    background:linear-gradient(135deg,#008f7a,#00cec9,#0ea5e9);
+    box-shadow:0 12px 25px rgba(0,206,201,0.38);
+}
+
+@keyframes entrada{
+    from{
+        opacity:0;
+        transform:translateY(35px) scale(0.96);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+@keyframes entradaModal{
+    from{
+        opacity:0;
+        transform:scale(0.92);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@keyframes pulso{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.04);}
+    100%{transform:scale(1);}
+}
+
+@keyframes brillo{
+    0%{
+        transform:scale(1);
+        box-shadow:0 12px 25px rgba(0,206,201,0.40);
+    }
+    50%{
+        transform:scale(1.04);
+        box-shadow:0 15px 32px rgba(0,206,201,0.62);
+    }
+    100%{
+        transform:scale(1);
+        box-shadow:0 12px 25px rgba(0,206,201,0.40);
+    }
+}
+
+@media(max-width:768px){
+    body{
+        align-items:flex-start;
+        padding:24px 16px;
+    }
+
+    .container{
+        max-width:480px;
+        padding:32px 24px;
+    }
+}
+
+@media(max-width:480px){
+    body{
+        align-items:flex-start;
+        padding:18px 12px;
+    }
+
+    body::before{
+        width:300px;
+        height:300px;
+        top:-130px;
+        right:-120px;
+    }
+
+    body::after{
+        width:250px;
+        height:250px;
+        bottom:-110px;
+        left:-100px;
+    }
+
+    .container{
+        padding:28px 18px;
+        border-radius:26px;
+    }
+
+    .logo{
+        width:80px;
+        height:80px;
+        font-size:36px;
+        border-radius:24px;
+    }
+
+    h1{
+        font-size:27px;
+    }
+
+    .subtitulo{
+        font-size:14px;
+    }
+
+    .dato-pago{
+        font-size:14px;
+        padding:14px 16px;
+    }
+
+    .soporte{
+        font-size:14px;
+        padding:10px 15px;
+    }
+
+    .qr-box{
+        padding:18px 15px;
+    }
+
+    .qr-box img{
+        width:205px;
+    }
+
+    .btn{
+        font-size:14px;
+        padding:15px 16px;
+    }
+
+    .modal-content{
+        padding:18px;
+        border-radius:22px;
+    }
+
+    .texto-terminos{
+        height:300px;
+        font-size:12.5px;
+        padding:14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">💙</div>
+
+    <p class="empresa">MEDINA-NET</p>
+
+    <h1>Pago con Agora</h1>
+
+    <div class="subtitulo">
+        Escanea el QR y realiza tu pago de forma rápida, segura y confiable.
+    </div>
+
+    <div class="dato-pago">
+        <b>Datos de pago:</b><br>
+        Método: <strong>Agora</strong><br>
+        Número: <strong>935128270</strong><br>
+        Titular: <strong>MEDINA PAUL</strong><br>
+        Estado: <strong>Pago seguro y verificado</strong>
+    </div>
+
+    <div class="soporte">
+        🛠️ Soporte Técnico 24/7
+    </div>
+
+    <div class="qr-box">
+        <h3>Escanea el código QR</h3>
+        <img src="qr.png" alt="Código QR Agora">
+    </div>
+
+    <div class="aviso">
+        Luego de realizar tu pago por <strong>Agora</strong>, envía tu comprobante por WhatsApp para validar tu operación.
+    </div>
+
+    <div class="botones">
+        <a class="btn btn-whatsapp" href="https://wa.me/51935128270?text=Hola,%20ya%20realicé%20mi%20pago%20por%20Agora.%20Adjunto%20mi%20comprobante." target="_blank">
+            📲 Enviar comprobante por WhatsApp
+        </a>
+
+        <button class="btn btn-terminos" onclick="abrirTerminos()">
+            📄 Ver Términos y Condiciones
+        </button>
+    </div>
+
+    <a class="volver" href="../index.html">⬅ Volver al inicio</a>
+
+    <div class="footer">
+        Gracias por tu preferencia 🙌<br>
+        <strong>MEDINA-NET</strong>
+    </div>
+
+</div>
+
+<!-- MODAL TÉRMINOS Y CONDICIONES -->
+<div id="modalTerminos" class="modal">
+    <div class="modal-content">
+        <h2>📄 Términos y Condiciones</h2>
+
+        <div class="texto-terminos">
+            <b>1. IDENTIFICACIÓN DEL SERVICIO</b><br>
+            MEDINA-NET brinda servicios digitales y de internet dentro de su zona de cobertura.
+
+            <br><br>
+
+            <b>2. PAGOS</b><br>
+            El pago realizado por Agora debe ser confirmado mediante el envío del comprobante correspondiente.
+
+            <br><br>
+
+            <b>3. VALIDACIÓN</b><br>
+            La operación será validada por el equipo de MEDINA-NET una vez recibido el comprobante de pago.
+
+            <br><br>
+
+            <b>4. RESPONSABILIDAD DEL CLIENTE</b><br>
+            El cliente debe verificar correctamente el número, monto y método de pago antes de realizar la operación.
+
+            <br><br>
+
+            <b>5. SOPORTE TÉCNICO</b><br>
+            El soporte técnico está disponible para consultas y validaciones relacionadas con el servicio.
+
+            <br><br>
+
+            <b>6. ACEPTACIÓN</b><br>
+            Al realizar el pago, el cliente acepta los presentes términos y condiciones.
+        </div>
+
+        <button class="cerrar-btn" onclick="cerrarTerminos()">❌ Cerrar</button>
+    </div>
+</div>
+
+<script>
+function abrirTerminos(){
+    document.getElementById("modalTerminos").style.display = "flex";
+}
+
+function cerrarTerminos(){
+    document.getElementById("modalTerminos").style.display = "none";
+}
+</script>
+
+</body>
+</html>
